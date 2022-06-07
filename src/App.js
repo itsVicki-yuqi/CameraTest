@@ -1,5 +1,16 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useRef, useEffect, useState, useStyles} from "react";
 function App() {
+  const classes = useStyles();
+  const [source, setSource] = useState("");
+  const handleCapture = (target) => {
+    if(target.files){
+      if(target.files.length !== 0){
+        const file = target.files[0];
+        const newUrl = URL.createObjectURL(file);
+        setSource(newUrl);
+      }
+    }
+  }
   const videoRef = useRef(null);
   const photoRef = useRef(null);
   const [hasPhoto, setHasPhoto] = useState(false);
@@ -63,7 +74,14 @@ function App() {
       <div className={'result'+(hasPhoto? 'hasPhoto':'')}>
         <canvas ref={photoRef}></canvas>
         <button onClick={closePhoto}>Close</button>
-
+        <input
+        accept="image/*"
+        className={classes.input}
+        id = "icon-button-file"
+        type = "file"
+        capture = "environment"
+        onChange = {(e) => handleCapture(e.target)}
+        />
       </div>
     </div>
   );
