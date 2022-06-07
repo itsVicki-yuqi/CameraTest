@@ -12,7 +12,7 @@ function Test() {
     <div>
         {
             (source)
-            ? <button>NOTHING</button>
+            ? <img src={source}/>
             : <Camera onTakePhotoAnimationDone={handleTakePhoto}/>
         }
     </div>
